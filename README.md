@@ -1,0 +1,1 @@
+# mandatory-applied-architecture-net8
