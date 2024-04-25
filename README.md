@@ -18,12 +18,12 @@
   - Abstracción CQRS de Command           14:31
   - Abstracción CQRS de QueryHandler      16:48
   - Abstracción CQRS de CommandHandler    21:03
-  - Implementación de mensajes tipo Query -
-  - Implementación de mensajes tipo Command -
-  - Registrar mínimal endpoints y libreria Carter
-  - FindProductById Minimal Endpoint con Carter
-  - FindProductById Query Handler con MediatR
-  - AddProduct Minimal Endpoint con Carter
-  - AddProduct Command Handler con MediatR
+  - Implementación de mensajes tipo Query 24:53
+  - Implementación de mensajes tipo Command 28:49
+  - Registrar mínimal endpoints y libreria Carter 34:38
+  - Minimal Endpoint FindProductById con Carter 36:23
+  - Query Handler FindProductById con MediatR 43:23
+  - Minimal Endpoint AddProduct con Carter 49:01
+  - Command Handler AddProduct con MediatR 55:14
   - global_usings                         -
 
