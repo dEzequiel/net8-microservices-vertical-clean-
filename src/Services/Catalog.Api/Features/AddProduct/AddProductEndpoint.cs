@@ -16,7 +16,7 @@ namespace Catalog.Api.Features.AddProduct
                 var command = new AddProductCommand(request.name, request.description, request.categories, request.price);
                 var result = await _mediator.Send(command);
                 var response = new AddProductResponse(result.Id);
-                return Results.CreatedAtRoute($"/products/{response.Id}", response);
+                return Results.Created($"/products/{response.Id}", response);
             });
         }
     }
