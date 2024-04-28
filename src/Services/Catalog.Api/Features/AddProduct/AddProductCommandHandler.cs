@@ -1,4 +1,5 @@
 ﻿using Catalog.Api.Data;
+using Catalog.Api.Data.Repositories;
 using Catalog.Api.Domain;
 using Catalog.Api.Message.Command;
 using Crosscutting.CQRS.Infrastructure;
@@ -7,18 +8,18 @@ namespace Catalog.Api.Features.AddProduct
 {
     public class AddProductCommandHandler : ICommandHandler<AddProductCommand, AddProductCommandResponse>
     {
-        private readonly DatabaseContext _dbContext;
+        private readonly IProductRepository _productRepository;
 
-        public AddProductCommandHandler(DatabaseContext dbContext) =>
-            _dbContext = dbContext;
+        public AddProductCommandHandler(IProductRepository productRepository) =>
+            _productRepository = productRepository;
         
 
         public async Task<AddProductCommandResponse> Handle(AddProductCommand command, CancellationToken cancellationToken)
         {
             var product = new Product(Guid.NewGuid(), command.Name, command.Description, command.Categories, command.Price);
             
-            await _dbContext.AddAsync(product);
-            await _dbContext.SaveChangesAsync();
+            _productRepository.InsertProduct(product);
+            _productRepository.Save();
 
             var response = new AddProductCommandResponse(product.Id);
             return response;
