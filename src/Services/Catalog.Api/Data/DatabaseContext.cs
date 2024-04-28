@@ -10,7 +10,8 @@ namespace Catalog.Api.Data
         public DatabaseContext(DbContextOptions options) : base(options)
         {
         }
+        public DatabaseContext() { }
 
-        public DbSet<Product> Products { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     }
 }
