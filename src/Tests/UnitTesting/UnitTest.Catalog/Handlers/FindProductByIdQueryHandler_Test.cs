@@ -1,21 +1,4 @@
-﻿using Catalog.Api.Data.Repositories;
-using Catalog.Api.Data;
-using Microsoft.EntityFrameworkCore;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Catalog.Api.Data.Extensions;
-using Catalog.Api.Domain;
-using Catalog.Api.Features.FindAllProducts;
-using Catalog.Api.Message.Query;
-using Catalog.Api.Features.FindProductById;
-using UnitTest.Catalog.Config;
-using AutoFixture.Xunit2;
-
-namespace UnitTest.Catalog
+﻿namespace UnitTest.Catalog.Handlers
 {
     public class FindProductByIdQueryHandler_Test
     {
@@ -45,9 +28,9 @@ namespace UnitTest.Catalog
                 _productRepositoryMock.Object);
 
             // Act & assert
-            await Assert.ThrowsAnyAsync<NullReferenceException>(async () 
+            await Assert.ThrowsAnyAsync<NullReferenceException>(async ()
                 => await handler.Handle(query, default));
-            
+
             _productRepositoryMock.Verify(m => m.GetProductById(id), Times.Once());
         }
 

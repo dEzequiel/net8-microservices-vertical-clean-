@@ -1,8 +1,4 @@
-﻿using AutoFixture;
-using AutoFixture.Xunit2;
-
-
-namespace UnitTest.Catalog.Config
+﻿namespace UnitTest.Catalog.Config
 {
     public class AutoMoqDataAttribute : AutoDataAttribute
     {

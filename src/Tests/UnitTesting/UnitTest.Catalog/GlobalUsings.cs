@@ -1,0 +1,15 @@
+﻿global using AutoFixture;
+global using AutoFixture.AutoMoq;
+global using AutoFixture.Xunit2;
+global using Catalog.Api.Data.Repositories;
+global using Catalog.Api.Data;
+global using Microsoft.EntityFrameworkCore;
+global using Moq;
+global using UnitTest.Catalog.Config;
+global using Catalog.Api.Domain;
+global using Catalog.Api.Features.AddProduct;
+global using Catalog.Api.Message.Command;
+global using Catalog.Api.Data.Extensions;
+global using Catalog.Api.Features.FindAllProducts;
+global using Catalog.Api.Message.Query;
+global using Catalog.Api.Features.FindProductById;

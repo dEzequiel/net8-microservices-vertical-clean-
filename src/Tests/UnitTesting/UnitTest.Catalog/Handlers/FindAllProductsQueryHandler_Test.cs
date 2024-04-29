@@ -1,14 +1,4 @@
-using Catalog.Api.Data;
-using Catalog.Api.Data.Extensions;
-using Catalog.Api.Data.Repositories;
-using Catalog.Api.Domain;
-using Catalog.Api.Features.FindAllProducts;
-using Catalog.Api.Message.Query;
-using Microsoft.EntityFrameworkCore;
-using Moq;
-using Moq.EntityFrameworkCore;
-
-namespace UnitTest.Catalog
+namespace UnitTest.Catalog.Handlers
 {
     public class FindAllProductsQueryHandler_Test
     {
@@ -36,7 +26,7 @@ namespace UnitTest.Catalog
                 _productRepositoryMock.Object);
 
             // Act
-            var result = await handler.Handle(query, default);    
+            var result = await handler.Handle(query, default);
 
             // Assert
             _productRepositoryMock.Verify(m => m.GetProducts(default), Times.Once());

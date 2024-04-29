@@ -1,8 +1,4 @@
-﻿using AutoFixture;
-using AutoFixture.AutoMoq;
-
-
-namespace UnitTest.Catalog.Config
+﻿namespace UnitTest.Catalog.Config
 {
     public class AutoFixtureCustomization : ICustomization
     {
