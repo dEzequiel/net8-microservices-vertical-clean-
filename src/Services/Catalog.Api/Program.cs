@@ -1,6 +1,7 @@
 using Carter;
 using Catalog.Api.Data;
 using Catalog.Api.Data.Extensions;
+using Catalog.Api.Data.Repositories;
 using Crosscuting.Base.Behaviours;
 using MediatR.Pipeline;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ builder.Services.AddDbContext<DatabaseContext>(opt =>
 {
     opt.UseNpgsql(builder.Configuration.GetConnectionString("Postgres"));
 });
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 
