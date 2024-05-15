@@ -1,6 +1,7 @@
 ﻿using Catalog.Api.Data;
 using Catalog.Api.Data.Repositories;
 using Catalog.Api.Domain;
+using Catalog.Api.Domain.Enums;
 using Catalog.Api.Message.Command;
 using Crosscutting.CQRS.Infrastructure;
 
@@ -16,7 +17,7 @@ namespace Catalog.Api.Features.AddProduct
 
         public async Task<AddProductCommandResponse> Handle(AddProductCommand command, CancellationToken cancellationToken)
         {
-            var product = new Product(Guid.NewGuid(), command.Name, command.Description, command.Categories, command.Price);
+            var product = new Product(Guid.NewGuid(), command.Name, command.Description, command.Price, (int)command.ProductCategory);
             
             _productRepository.InsertProduct(product);
             _productRepository.Save();

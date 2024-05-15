@@ -9,12 +9,7 @@ namespace Catalog.Api.Data.Extensions
         {
             var scope = app.Services.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
-
-            if (context.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
-            {
-                context.Database.Migrate();
-            }
-
+            context.Database.Migrate();
             await SeedProductAsync(context);
 
         }
