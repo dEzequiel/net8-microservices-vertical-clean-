@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Testcontainers.PostgreSql;
@@ -12,10 +13,12 @@ namespace IntegrationTest.Catalog.Config
             .WithDatabase("integration_tests")
             .WithUsername("postgres")
             .WithPassword("postgres")
+            .WithReuse(true)
             .Build();
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
+            Environment.SetEnvironmentVariable("EnviromentVar", "EnviromentTest");
             builder.ConfigureTestServices(srv =>
             {
                 var descriptor = srv.SingleOrDefault(s => s.ServiceType == typeof(DbContextOptions<DatabaseContext>));
@@ -31,14 +34,36 @@ namespace IntegrationTest.Catalog.Config
             });
         }
 
-        public Task InitializeAsync()
+        public async Task InitializeAsync()
         {
-            return _dbContainer.StartAsync();
+            await _dbContainer.StartAsync();
+            using var scope = Services.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+            await dbContext.Database.MigrateAsync();
+            await SeedDatabaseAsync(dbContext);
         }
 
-        public Task DisposeAsync()
+        public new async Task DisposeAsync()
         {
-            return _dbContainer.StopAsync();
+            Environment.SetEnvironmentVariable("EnviromentVar", "");
+            await _dbContainer.DisposeAsync();
+        }
+
+        public static async Task SeedDatabaseAsync(DatabaseContext context)
+        {
+            await SeedProductAsync(context);
+
+        }
+        private static async Task SeedProductAsync(DatabaseContext dbContext)
+        {
+            var isAnyProduct = await dbContext.Products.AnyAsync();
+            if (!isAnyProduct)
+            {
+                await dbContext.AddRangeAsync(InitialData.Products);
+                await dbContext.SaveChangesAsync();
+            }
         }
     }
+
+
 }

@@ -1,3 +1,5 @@
+using Catalog.Api.DTOs;
+
 namespace UnitTest.Catalog.Handlers
 {
     public class FindAllProductsQueryHandler_Test
@@ -32,7 +34,7 @@ namespace UnitTest.Catalog.Handlers
             _productRepositoryMock.Verify(m => m.GetProducts(default), Times.Once());
             Assert.NotNull(result);
             Assert.NotEmpty(result.Products);
-            Assert.Contains(result.Products, prod => prod is Product);
+            Assert.Contains(result.Products, prod => prod is ProductDetailsDTO);
         }
 
         [Fact]

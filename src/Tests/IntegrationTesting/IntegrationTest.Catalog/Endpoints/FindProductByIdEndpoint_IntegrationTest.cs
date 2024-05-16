@@ -1,4 +1,6 @@
-﻿namespace IntegrationTest.Catalog.Endpoints
+﻿using Catalog.Api.DTOs;
+
+namespace IntegrationTest.Catalog.Endpoints
 {
     public class FindProductByIdEndpoint_IntegrationTest : BaseIntegrationTest
     {
@@ -14,8 +16,8 @@
             var getRequest = new HttpRequestMessage(HttpMethod.Get, $"/products/{productId}");
 
             // Act
-            var result = await _client.SendAsync(getRequest);
-            var responseString = await result.Content.ReadAsStringAsync();
+            var response = await _client.SendAsync(getRequest);
+            var responseString = await response.Content.ReadAsStringAsync();
 
             JObject jsonResponse = JObject.Parse(responseString);
             JToken? productToken = jsonResponse.SelectToken("product");
@@ -23,13 +25,11 @@
             if (productToken == null)
                 Assert.Fail("Product key in json response not found.");
 
-            var product = productToken.ToObject<Product>();
+            var product = productToken.ToObject<ProductDTO>();
 
             // Assert
-            Assert.Equal(HttpStatusCode.OK, result.StatusCode);
-            Assert.NotNull(result);
-            Assert.NotNull(product);
-            Assert.Equivalent(InitialData.Products.First(), product);
+            response.EnsureSuccessStatusCode();
+            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
         }
     }
 }

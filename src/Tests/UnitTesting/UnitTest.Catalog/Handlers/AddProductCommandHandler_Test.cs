@@ -1,4 +1,6 @@
-﻿namespace UnitTest.Catalog.Handlers
+﻿using Catalog.Api.Domain.Enums;
+
+namespace UnitTest.Catalog.Handlers
 {
     public class AddProductCommandHandler_Test
     {
@@ -16,8 +18,9 @@
         public async Task AddProductCommandHandler_ReturnsResponse(
             [Frozen] Product prodToAdd)
         {
+
             // Arrange
-            var command = new AddProductCommand(prodToAdd.Name, prodToAdd.Description, prodToAdd.Categories, prodToAdd.Price);
+            var command = new AddProductCommand(prodToAdd.Name, prodToAdd.Description, prodToAdd.Price, (ProductCategories)prodToAdd.ProductCategoryId);
             _productRepositoryMock.Setup(
                 x => x.InsertProduct(It.IsAny<Product>()))
                 .Verifiable();

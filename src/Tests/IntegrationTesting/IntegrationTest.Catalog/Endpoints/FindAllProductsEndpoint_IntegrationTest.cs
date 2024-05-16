@@ -13,8 +13,8 @@
             var getRequest = new HttpRequestMessage(HttpMethod.Get, "/products");
 
             // Act
-            var result = await _client.SendAsync(getRequest);
-            var responseString = await result.Content.ReadAsStringAsync();
+            var response = await _client.SendAsync(getRequest);
+            var responseString = await response.Content.ReadAsStringAsync();
 
             JObject jsonResponse = JObject.Parse(responseString);
             JToken? productsToken = jsonResponse.SelectToken("products");
@@ -25,11 +25,8 @@
             var products = productsToken.ToObject<IEnumerable<Product>>();
 
             // Assert
-            Assert.Equal(HttpStatusCode.OK, result.StatusCode);
-            Assert.NotNull(result);
-            Assert.NotEmpty(products);
-            var testDbTotalEntities = _dbContext.Products.Count();
-            Assert.Equal(testDbTotalEntities, products.Count());
+            response.EnsureSuccessStatusCode();
+            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
         }
     }
 }

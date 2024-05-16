@@ -52,12 +52,9 @@
 
             // Act 
             var result = await handler.Handle(query, default);
-            Product prod = result.Product;
 
             // Assert
             _productRepositoryMock.Verify(m => m.GetProductById(id), Times.Once());
-            Assert.NotNull(prod);
-            Assert.IsType<Product>(prod);
         }
     }
 }

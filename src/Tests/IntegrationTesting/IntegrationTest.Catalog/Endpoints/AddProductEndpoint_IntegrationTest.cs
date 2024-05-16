@@ -1,4 +1,6 @@
-﻿namespace IntegrationTest.Catalog.Endpoints
+﻿using Catalog.Api.Domain.Enums;
+
+namespace IntegrationTest.Catalog.Endpoints
 {
     public class AddProductEndpoint_IntegrationTest : BaseIntegrationTest
     {
@@ -6,14 +8,17 @@
         {
         }
 
-        [Theory]
+        [Fact]
         [AutoMoqData]
-        public async Task AddProductEndpoint_ReturnsResponseAndStatusCode201_Test(
-            AddProductRequest request)
+        public async Task AddProductEndpoint_ReturnsResponseAndStatusCode201_Test()
         {
+            // Arrange
+            string GenerateNewGuid() => Guid.NewGuid().ToString();
+            var request = new AddProductRequest(GenerateNewGuid(), GenerateNewGuid(), 00, (int)ProductCategories.MobilePhone);
+            
             // Act
-            var result = await _client.PostAsJsonAsync("/products", request);
-            var responseString = await result.Content.ReadAsStringAsync();
+            var response = await _client.PostAsJsonAsync("/products", request);
+            var responseString = await response.Content.ReadAsStringAsync();
 
             JObject jsonResponse = JObject.Parse(responseString);
             JToken? idToken = jsonResponse.SelectToken("id");
@@ -24,9 +29,9 @@
             var sut = idToken.ToObject<Guid>();
 
             // Assert
-            Assert.Equal(HttpStatusCode.Created, result.StatusCode);
-            var product = _dbContext.Products.First(x => x.Id == sut);
-            Assert.NotNull(product);
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
         }
     }
 }

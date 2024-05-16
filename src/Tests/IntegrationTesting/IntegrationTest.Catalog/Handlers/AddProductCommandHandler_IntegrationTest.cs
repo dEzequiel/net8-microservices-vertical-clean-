@@ -1,4 +1,6 @@
-﻿namespace IntegrationTest.Catalog.Handlers
+﻿using Catalog.Api.Domain.Enums;
+
+namespace IntegrationTest.Catalog.Handlers
 {
     public class AddProductCommandHandler_IntegrationTest : BaseIntegrationTest
     {
@@ -12,7 +14,8 @@
             [Frozen] Product prodToAdd)
         {
             // Arrange
-            var command = new AddProductCommand(prodToAdd.Name, prodToAdd.Description, prodToAdd.Categories, prodToAdd.Price);
+            var command = new AddProductCommand(prodToAdd.Name, prodToAdd.Description, prodToAdd.Price, 
+                (ProductCategories)prodToAdd.ProductCategoryId);
 
             // Act
             var result = await _sender.Send(command);

@@ -1,4 +1,6 @@
-﻿namespace IntegrationTest.Catalog.Handlers
+﻿using Catalog.Api.DTOs;
+
+namespace IntegrationTest.Catalog.Handlers
 {
     public class FindProductByIdQueryHandler_IntegrationTest : BaseIntegrationTest
     {
@@ -10,8 +12,8 @@
         public async Task FindProductByIdQueryHandler_ShouldReturnsResponse_IntegrationTest()
         {
             // Arrange
-            var productId = InitialData.Products.First().Id;
-            FindProductByIdQuery query = new FindProductByIdQuery(productId);
+            var product = InitialData.Products.First();
+            FindProductByIdQuery query = new FindProductByIdQuery(product.Id);
 
             // Act
             var result = await _sender.Send(query);
@@ -19,7 +21,8 @@
             // Assert
             Assert.NotNull(result);
             Assert.NotNull(result.Product);
-            Assert.IsType<Product>(result.Product);
+            Assert.Equal(product.Id, result.Product.id);
+            Assert.IsType<ProductDTO>(result.Product);
 
         }
     }
