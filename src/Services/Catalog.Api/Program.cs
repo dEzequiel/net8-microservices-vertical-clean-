@@ -1,15 +1,3 @@
-using Carter;
-using Catalog.Api;
-using Catalog.Api.Data;
-using Catalog.Api.Data.Extensions;
-using Catalog.Api.Data.Repositories;
-using Catalog.Api.Domain;
-using Catalog.Api.DTOs;
-using Crosscuting.Base.Behaviours;
-using Mapster;
-using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

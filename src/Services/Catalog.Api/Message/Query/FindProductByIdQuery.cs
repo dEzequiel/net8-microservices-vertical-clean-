@@ -1,8 +1,4 @@
-﻿using Catalog.Api.Domain;
-using Catalog.Api.DTOs;
-using Crosscutting.CQRS.Domain;
-
-namespace Catalog.Api.Message.Query
+﻿namespace Catalog.Api.Message.Query
 {
     public class FindProductByIdQuery : IQuery<FindProductByIdQueryResponse>
     {

@@ -1,10 +1,4 @@
-﻿using Carter;
-using Catalog.Api.Domain;
-using Catalog.Api.DTOs;
-using Catalog.Api.Message.Query;
-using MediatR;
-
-namespace Catalog.Api.Features.FindAllProducts
+﻿namespace Catalog.Api.Features.FindAllProducts
 {
     public record FindAllProductsResponse(IEnumerable<ProductDetailsDTO> Products);
     public class FindAllProductsEndpoint : ICarterModule

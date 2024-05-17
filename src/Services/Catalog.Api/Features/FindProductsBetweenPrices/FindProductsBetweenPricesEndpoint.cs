@@ -1,9 +1,4 @@
-﻿using Carter;
-using Catalog.Api.DTOs;
-using Catalog.Api.Features.FindProductsByCategory;
-using Catalog.Api.Message.Query;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Api.Features.FindProductsBetweenPrices
 {

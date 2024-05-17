@@ -1,6 +1,4 @@
-﻿using Crosscutting.CQRS.Domain;
-
-namespace Catalog.Api.Message.Command
+﻿namespace Catalog.Api.Message.Command
 {
     public class UpdateProductCommand : ICommand<UpdateProductCommandResponse>
     {

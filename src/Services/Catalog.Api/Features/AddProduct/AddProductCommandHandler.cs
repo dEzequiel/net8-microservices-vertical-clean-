@@ -1,11 +1,4 @@
-﻿using Catalog.Api.Data;
-using Catalog.Api.Data.Repositories;
-using Catalog.Api.Domain;
-using Catalog.Api.Domain.Enums;
-using Catalog.Api.Message.Command;
-using Crosscutting.CQRS.Infrastructure;
-
-namespace Catalog.Api.Features.AddProduct
+﻿namespace Catalog.Api.Features.AddProduct
 {
     public class AddProductCommandHandler : ICommandHandler<AddProductCommand, AddProductCommandResponse>
     {

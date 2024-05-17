@@ -1,11 +1,4 @@
-﻿using Catalog.Api.Data.Repositories;
-using Catalog.Api.Domain;
-using Catalog.Api.DTOs;
-using Catalog.Api.Message.Query;
-using Crosscutting.CQRS.Infrastructure;
-using Mapster;
-
-namespace Catalog.Api.Features.FindProductById
+﻿namespace Catalog.Api.Features.FindProductById
 {
     public class FindProductByIdQueryHandler : IQueryHandler<FindProductByIdQuery, FindProductByIdQueryResponse>
     {

@@ -1,10 +1,4 @@
-﻿using Carter;
-using Catalog.Api.Domain;
-using Catalog.Api.DTOs;
-using Catalog.Api.Message.Query;
-using MediatR;
-
-namespace Catalog.Api.Features.FindProductById
+﻿namespace Catalog.Api.Features.FindProductById
 {
     public record FindProductByIdResponse(ProductDTO Product);
     public class FindProductByIdEndpoint : ICarterModule

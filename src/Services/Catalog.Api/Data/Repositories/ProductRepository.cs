@@ -1,6 +1,4 @@
-﻿using Catalog.Api.Domain;
-using Microsoft.EntityFrameworkCore;
-
+﻿
 namespace Catalog.Api.Data.Repositories
 {
     public class ProductRepository : IProductRepository, IDisposable

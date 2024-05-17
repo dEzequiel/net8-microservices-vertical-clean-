@@ -1,6 +1,4 @@
-﻿using Catalog.Api.Domain;
-
-namespace Catalog.Api.Data.Repositories
+﻿namespace Catalog.Api.Data.Repositories
 {
     public interface IProductRepository : IDisposable
     {

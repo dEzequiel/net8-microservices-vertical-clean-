@@ -1,8 +1,4 @@
-﻿using Carter;
-using Catalog.Api.Message.Command;
-using MediatR;
-
-namespace Catalog.Api.Features.DeleteProduct
+﻿namespace Catalog.Api.Features.DeleteProduct
 {
     public record DeleteProductResponse(bool isSucess);
     public class DeleteProductEndpoint : ICarterModule

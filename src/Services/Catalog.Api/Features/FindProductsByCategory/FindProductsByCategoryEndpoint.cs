@@ -1,10 +1,4 @@
-﻿using Carter;
-using Catalog.Api.DTOs;
-using Catalog.Api.Message.Query;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Catalog.Api.Features.FindProductsByCategory
+﻿namespace Catalog.Api.Features.FindProductsByCategory
 {
     public record FindAllProductsByCategoryRequest(IEnumerable<int> productCategoryIds);
     public record FindAllProductsByCategoryResponse(IEnumerable<ProductDTO> products);

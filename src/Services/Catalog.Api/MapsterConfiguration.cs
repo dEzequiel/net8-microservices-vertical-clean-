@@ -1,9 +1,4 @@
-﻿using Catalog.Api.Domain;
-using Catalog.Api.DTOs;
-using Mapster;
-using System.Reflection;
-
-namespace Catalog.Api
+﻿namespace Catalog.Api
 {
     public static class MapsterConfiguration
     {

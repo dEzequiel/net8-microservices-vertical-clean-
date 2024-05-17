@@ -1,7 +1,4 @@
-﻿using Catalog.Api.Domain;
-using Catalog.Api.Domain.Enums;
-
-namespace Catalog.Api.Data.Extensions
+﻿namespace Catalog.Api.Data.Extensions
 {
     public static class InitialData
     {

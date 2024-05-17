@@ -1,7 +1,4 @@
-﻿using Catalog.Api.DTOs;
-using Crosscutting.CQRS.Domain;
-
-namespace Catalog.Api.Message.Query
+﻿namespace Catalog.Api.Message.Query
 {
     public class FindAllProductsBetweenPricesQuery : IQuery<FindAllProductsBetweenPricesQueryResponse>
     {

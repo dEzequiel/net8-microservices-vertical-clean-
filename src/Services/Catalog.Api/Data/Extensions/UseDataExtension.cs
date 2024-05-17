@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-
+﻿
 namespace Catalog.Api.Data.Extensions
 {
     public static class UseDataExtension

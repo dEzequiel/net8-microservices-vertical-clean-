@@ -1,9 +1,4 @@
-﻿using Catalog.Api.Data.Configuration;
-using Catalog.Api.Domain;
-using Catalog.Api.Domain.Enums;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Reflection.Emit;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Api.Data
 {

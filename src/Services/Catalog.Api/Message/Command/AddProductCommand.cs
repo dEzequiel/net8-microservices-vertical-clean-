@@ -1,8 +1,4 @@
-﻿using Catalog.Api.Domain;
-using Catalog.Api.Domain.Enums;
-using Crosscutting.CQRS.Domain;
-
-namespace Catalog.Api.Message.Command
+﻿namespace Catalog.Api.Message.Command
 {
     public class AddProductCommand : ICommand<AddProductCommandResponse>
     {

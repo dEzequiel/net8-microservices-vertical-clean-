@@ -1,8 +1,4 @@
-﻿using Catalog.Api.Data.Repositories;
-using Catalog.Api.Message.Command;
-using Crosscutting.CQRS.Infrastructure;
-
-namespace Catalog.Api.Features.DeleteProduct
+﻿namespace Catalog.Api.Features.DeleteProduct
 {
     public class DeleteProductCommandHandler : ICommandHandler<DeleteProductCommand, DeleteProductCommandResponse>
     {

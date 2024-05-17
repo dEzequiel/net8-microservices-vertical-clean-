@@ -1,7 +1,4 @@
-﻿using Catalog.Api.Domain;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
-
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Catalog.Api.Data.Configuration
 {
     public class ProductEntityConfiguration : IEntityTypeConfiguration<Product>

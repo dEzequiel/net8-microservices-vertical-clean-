@@ -1,10 +1,4 @@
-﻿using Catalog.Api.Data.Repositories;
-using Catalog.Api.DTOs;
-using Catalog.Api.Message.Query;
-using Crosscutting.CQRS.Infrastructure;
-using Mapster;
-
-namespace Catalog.Api.Features.FindProductsBetweenPrices
+﻿namespace Catalog.Api.Features.FindProductsBetweenPrices
 {
     public class FindProductsBetweenPricesQueryHandler : IQueryHandler<FindAllProductsBetweenPricesQuery, FindAllProductsBetweenPricesQueryResponse>
     {

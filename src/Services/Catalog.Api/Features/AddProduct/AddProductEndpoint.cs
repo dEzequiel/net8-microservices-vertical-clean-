@@ -1,9 +1,4 @@
-﻿using Carter;
-using Catalog.Api.Domain.Enums;
-using Catalog.Api.Message.Command;
-using MediatR;
-
-namespace Catalog.Api.Features.AddProduct
+﻿namespace Catalog.Api.Features.AddProduct
 {
     public record AddProductRequest(string name, string? description, decimal price, int productCategory);
     public record AddProductResponse(Guid Id);
