@@ -22,15 +22,14 @@ builder.Services.AddSwaggerGen(opt =>
 
     opt.OperationFilter<SecurityRequirementsOperationFilter>();
 });
+builder.Services.RegisterAuthentication(builder.Configuration);
 builder.Services.AddDbContext<ApplicationDbContext>(opt =>
 {
     opt.UseNpgsql(builder.Configuration.GetConnectionString("AuthServiceDatabase"));
 });
-
+builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 builder.Services.AddAuthorization();
 
-builder.Services.AddIdentityApiEndpoints<User>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 var app = builder.Build();
 
@@ -42,7 +41,6 @@ if (app.Environment.IsDevelopment())
     app.ApplyMigrations();
 }
 
-app.MapIdentityApi<User>();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
