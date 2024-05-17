@@ -1,8 +1,8 @@
-﻿using Catalog.Api.Data;
-using Catalog.Api.Data.Repositories;
+﻿using Catalog.Api.Data.Repositories;
+using Catalog.Api.DTOs;
 using Catalog.Api.Message.Query;
 using Crosscutting.CQRS.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+using Mapster;
 
 namespace Catalog.Api.Features.FindAllProducts
 {
@@ -16,7 +16,8 @@ namespace Catalog.Api.Features.FindAllProducts
         public async Task<FindAllProductsQueryResponse> Handle(FindAllProductsQuery query, CancellationToken cancellationToken)
         {
             var products = await _productRepository.GetProducts(cancellationToken);
-            var response = new FindAllProductsQueryResponse(products.ToList()) ;
+            var result = products.Adapt<IReadOnlyCollection<ProductDetailsDTO>>();
+            var response = new FindAllProductsQueryResponse(result) ;
             return response;
         }
     }

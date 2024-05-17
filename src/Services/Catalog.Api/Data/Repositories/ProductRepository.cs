@@ -16,6 +16,7 @@ namespace Catalog.Api.Data.Repositories
         public Product GetProductById(Guid Id) =>
             context.Products.AsNoTracking().First(x => x.Id == Id);
 
+
         public async Task<IEnumerable<Product>> GetProducts(CancellationToken ct = default) =>
             await context.Products.AsNoTracking().ToListAsync(ct);
 
@@ -28,6 +29,11 @@ namespace Catalog.Api.Data.Repositories
         public void UpdateProduct(Product Product) =>
             context.Products.Update(Product);
 
+        public async Task<IEnumerable<Product>> GetProductsByCategory(IEnumerable<int> productCategoriesIds, CancellationToken ct = default) =>
+            await context.Products.AsNoTracking().Where(x => productCategoriesIds.Contains(x.ProductCategoryId)).ToListAsync(ct);
+
+        public async Task<IEnumerable<Product>> GetProductsBetweenPrices(decimal minPrice, decimal maxPrice, CancellationToken ct = default) =>
+            await context.Products.AsNoTracking().Where(x => x.Price <= maxPrice && x.Price >= minPrice).ToListAsync(ct);
 
         private bool disposed = false;
 
@@ -48,5 +54,7 @@ namespace Catalog.Api.Data.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+
     }
 }

@@ -1,7 +1,9 @@
-﻿using Catalog.Api.Data;
-using Catalog.Api.Data.Repositories;
+﻿using Catalog.Api.Data.Repositories;
+using Catalog.Api.Domain;
+using Catalog.Api.DTOs;
 using Catalog.Api.Message.Query;
 using Crosscutting.CQRS.Infrastructure;
+using Mapster;
 
 namespace Catalog.Api.Features.FindProductById
 {
@@ -11,7 +13,7 @@ namespace Catalog.Api.Features.FindProductById
 
         public FindProductByIdQueryHandler(IProductRepository productRepository) =>
             _productRepository = productRepository;
-        
+
 
         public async Task<FindProductByIdQueryResponse> Handle(FindProductByIdQuery query, CancellationToken cancellationToken)
         {
@@ -21,7 +23,8 @@ namespace Catalog.Api.Features.FindProductById
             if (product is null)
                 throw new NullReferenceException();
 
-            var response = new FindProductByIdQueryResponse(product);
+            var result = product.Adapt<ProductDTO>();
+            var response = new FindProductByIdQueryResponse(result);
             return response;
         }
     }

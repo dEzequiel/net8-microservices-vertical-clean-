@@ -1,4 +1,5 @@
 ﻿using Catalog.Api.Domain;
+using Catalog.Api.DTOs;
 using Crosscutting.CQRS.Domain;
 
 namespace Catalog.Api.Message.Query
@@ -9,5 +10,5 @@ namespace Catalog.Api.Message.Query
         public FindProductByIdQuery(Guid id) => Id = id;
     }
 
-    public record FindProductByIdQueryResponse(Product Product);
+    public record FindProductByIdQueryResponse(ProductDTO Product);
 }

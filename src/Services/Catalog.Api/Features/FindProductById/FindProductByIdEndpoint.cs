@@ -1,11 +1,12 @@
 ﻿using Carter;
 using Catalog.Api.Domain;
+using Catalog.Api.DTOs;
 using Catalog.Api.Message.Query;
 using MediatR;
 
 namespace Catalog.Api.Features.FindProductById
 {
-    public record FindProductByIdResponse(Product Product);
+    public record FindProductByIdResponse(ProductDTO Product);
     public class FindProductByIdEndpoint : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)
