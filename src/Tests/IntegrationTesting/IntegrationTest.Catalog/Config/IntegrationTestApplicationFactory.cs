@@ -13,7 +13,6 @@ namespace IntegrationTest.Catalog.Config
             .WithDatabase("integration_tests")
             .WithUsername("postgres")
             .WithPassword("postgres")
-            .WithReuse(true)
             .Build();
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)

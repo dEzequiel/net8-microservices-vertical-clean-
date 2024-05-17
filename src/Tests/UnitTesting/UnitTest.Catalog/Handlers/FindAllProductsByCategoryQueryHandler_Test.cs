@@ -73,8 +73,8 @@ namespace UnitTest.Catalog.Handlers
             _productRepositoryMock.Verify(m => m.GetProductsByCategory(productCategoriesIds ,default), Times.Once());
             Assert.NotNull(result);
             Assert.NotEmpty(result.Products);
-            Assert.Contains(result.Products, prod => prod is ProductDTO);
-            
+            Assert.All(result.Products, prod => Assert.IsType<ProductDTO>(prod));
+
             var dtoIds = result.Products.Select(x => x.id);
             var productIds = results.Select(x => x.Id);
             Assert.Equal(productIds, dtoIds);

@@ -1,4 +1,6 @@
-﻿namespace IntegrationTest.Catalog.Handlers
+﻿using Catalog.Api.DTOs;
+
+namespace IntegrationTest.Catalog.Handlers
 {
     public class FindAllProductsQueryHandler_IntegrationTest : BaseIntegrationTest
     {
@@ -18,7 +20,7 @@
             // Assert
             Assert.NotNull(result);
             Assert.NotEmpty(result.Products);
-            Assert.Contains(result.Products, prod => prod is Product);
+            Assert.All(result.Products, prod => Assert.IsType<ProductDetailsDTO>(prod));
         }
     }
 }

@@ -15,7 +15,7 @@ namespace IntegrationTest.Catalog.Handlers
         {
             // Arrange
             var command = new AddProductCommand(prodToAdd.Name, prodToAdd.Description, prodToAdd.Price, 
-                (ProductCategories)prodToAdd.ProductCategoryId);
+               ProductCategories.InteligentDevices);
 
             // Act
             var result = await _sender.Send(command);
@@ -24,8 +24,8 @@ namespace IntegrationTest.Catalog.Handlers
             Assert.NotNull(result);
             Assert.IsType<AddProductCommandResponse>(result);
             Assert.IsType<Guid>(result.Id);
-            var product = _dbContext.Products.FirstOrDefault(p => p.Id == result.Id);
-            Assert.NotNull(product);
+            var prod = _dbContext.Products.Local.FindEntry(result.Id);
+            Assert.NotNull(prod);
         }
     }
 }
