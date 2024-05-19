@@ -8,6 +8,9 @@ services:
       dockerfile: Services/Catalog.Api/Dockerfile
   catalog-db:
     image: postgres
+  auth-db:
+    image: postgres
 
 volumes:
-  catalog-db:    
+  catalog-db:  
+  auth-db:
