@@ -10,6 +10,10 @@ namespace Auth.Service.Data
         {
         }
 
+        public ApplicationDbContext()
+        {
+        }
+
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

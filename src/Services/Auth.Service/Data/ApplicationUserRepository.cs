@@ -34,11 +34,7 @@ namespace Auth.Service.Data
             if (getUser is not null)
                 return new RegisterApplicationUserResponse(false, $"User with email {registerUser.Email} already registered");
 
-            _context.ApplicationUsers.Add(new ApplicationUser()
-            {
-                Id = Guid.NewGuid(),
-                Email = registerUser.Email,
-            });
+            _context.ApplicationUsers.Add(new ApplicationUser(registerUser.Email));
 
             await _context.SaveChangesAsync();
             return new RegisterApplicationUserResponse(true, $"User registered with email {registerUser.Email}");
@@ -58,7 +54,7 @@ namespace Auth.Service.Data
             };
 
             var token = new JwtSecurityToken(
-                issuer: _config["Jwt:Isser"],
+                issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
                 claims: userClaims,
                 expires: DateTime.Now.AddDays(5),

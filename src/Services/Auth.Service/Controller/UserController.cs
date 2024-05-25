@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Auth.Service.Controller
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -24,7 +24,7 @@ namespace Auth.Service.Controller
         public async Task<ActionResult<RegisterApplicationUserResponse>> RegisterApplicationUser(RegisterApplicationUserDTO registerApplicationUserDTO)
         {
             var result = await _userRepository.RegisterApplicationUserAsync(registerApplicationUserDTO);
-            return Ok(result);
+            return Created(string.Empty, result);
         }
     }
 }
