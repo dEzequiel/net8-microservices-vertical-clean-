@@ -1,12 +1,10 @@
-version: '3.4'
-
 services:
   catalog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
-      - ConnectionStrings__Postgres=Server=catalog-db;Port=5432;Database=Catalog;User Id=eshop;Password=eshop;Include Error Detail=true
+      - ConnectionStrings__Postgres=Server=catalog-db;Port=5434;Database=Catalog;User Id=postgres;Password=postgres;Include Error Detail=true
     depends_on:
       - catalog-db
     ports:
@@ -18,12 +16,12 @@ services:
   catalog-db:
     container_name: catalog-db
     environment:
-      - POSTGRES_USER=eshop
-      - POSTGRES_PASSWORD=eshop
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=Catalog
     restart: always
     ports:
-      - "5432:5432"
+      - "5434:5432"
     volumes:
       - catalog-db:/var/lib/postgresql/data/
   auth-db:
