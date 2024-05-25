@@ -9,7 +9,6 @@ namespace IntegrationTest.Catalog.Endpoints
         }
 
         [Fact]
-        [AutoMoqData]
         public async Task AddProductEndpoint_ReturnsResponseAndStatusCode201_Test()
         {
             // Arrange
