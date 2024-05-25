@@ -51,7 +51,7 @@ namespace IntegrationTest.Auth.Endpoints
             _dbContext.ApplicationUsers.Add(user);
             _dbContext.SaveChanges();
 
-            // Act
+            /// Act
             var response = await _client.PostAsJsonAsync(LOGIN_ENDPOINT, registerApplicationUserData);
             var responseString = await response.Content.ReadAsStringAsync();
 
