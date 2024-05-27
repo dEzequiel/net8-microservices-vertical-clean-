@@ -11,7 +11,7 @@
                 var result = await _mediator.Send(query);
                 var response = new FindAllProductsResponse(result.Products);
                 return Results.Ok(response);
-            });
+            }).RequireAuthorization();
         }
     }
 }
