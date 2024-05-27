@@ -87,12 +87,7 @@ namespace IntegrationTest.Auth.Endpoints
 
             const string jwtIssuer = "https://localhost:5068";
             const string jwtAudience = "https://localhost:5068";
-            var jwtClaims = new[]
-                        {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email)
-            }; var registerApplicationUserData = new LoginApplicationUserDTO(userEmail);
-
+            var registerApplicationUserData = new LoginApplicationUserDTO(userEmail);
 
             var handler = new JwtSecurityTokenHandler();
 
@@ -110,10 +105,12 @@ namespace IntegrationTest.Auth.Endpoints
 
             // Assert
             Assert.Equal(jwtIssuer, sut.Issuer);
-            //Assert.Equal(jwtClaims, sut.Claims); //????
-            //Assert.Equal(DateTime.Now, sut.IssuedAt); //// ????
+            Assert.Equal(user.Email, sut.Claims.First(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress").Value); //????
+            Assert.Equal(user.Id.ToString(), sut.Claims.First(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid").Value); //????
+            //Assert.Equal(DateTime.Now.ToString("yyyy-MM-dd"), sut.IssuedAt.ToString("yyyy-MM-dd")); //// ????
             Assert.Equal(DateTime.Now.AddDays(5).ToString("yyyy-MM-dd"), sut.ValidTo.ToString("yyyy-MM-dd"));
             Assert.Equal(SecurityAlgorithms.HmacSha256, sut.SignatureAlgorithm);
+
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
