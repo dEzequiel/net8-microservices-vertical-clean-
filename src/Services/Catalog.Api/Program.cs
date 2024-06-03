@@ -1,7 +1,6 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using Catalog.Api.Services;
+using Crosscuting.Base.Exceptions;
 using Microsoft.OpenApi.Models;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +45,9 @@ builder.Services.AddDbContext<DatabaseContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("Postgres"));
 });
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IUserProvider, UserProvider>();
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.RegisterMapsterConfiguration();
 builder.Services.RegisterAuthenticationWithConfiguration(builder.Configuration);
@@ -63,6 +65,7 @@ if (app.Environment.IsDevelopment()/* && !Environment.GetEnvironmentVariable("En
 
 app.UseHttpsRedirection();
 app.MapCarter();
+app.UseExceptionHandler(options => { });
 app.UseAuthentication();
 app.UseAuthorization();
 app.Run();
