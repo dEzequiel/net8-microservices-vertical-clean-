@@ -5,7 +5,8 @@ namespace IntegrationTest.Catalog.Config
 {
     public class JwtTokenForTesting
     {
-        public List<Claim> Claims { get; } = new();
+        public Guid UserId { get; } = JwtTokenProvider.SutUserId;
+        public List<Claim> Claims { get; } = JwtTokenProvider.Claims;
         public int ExpireInMinutes { get; set; } = 30;
 
         public JwtTokenForTesting WithRole(string roleName)
