@@ -61,6 +61,7 @@ namespace Auth.Service.Data
                 signingCredentials: credentials
                 );
 
+
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }

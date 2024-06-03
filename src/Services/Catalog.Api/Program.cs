@@ -63,8 +63,9 @@ if (app.Environment.IsDevelopment()/* && !Environment.GetEnvironmentVariable("En
 
 app.UseHttpsRedirection();
 app.MapCarter();
-app.Run();
 app.UseAuthentication();
 app.UseAuthorization();
+app.Run();
+
 
 public partial class Program { }

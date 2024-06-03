@@ -10,7 +10,7 @@
         public async Task<FindAllProductsQueryResponse> Handle(FindAllProductsQuery query, CancellationToken cancellationToken)
         {
             var products = await _productRepository.GetProducts(cancellationToken);
-            var result = products.Adapt<IReadOnlyCollection<ProductDetailsDTO>>();
+            var result = products.Adapt<IEnumerable<ProductDetailsDTO>>();
             var response = new FindAllProductsQueryResponse(result) ;
             return response;
         }
