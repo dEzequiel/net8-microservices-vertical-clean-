@@ -20,7 +20,8 @@ namespace IntegrationTest.Catalog.Handlers
         {
             // Arrange
             Product prod = new Product(
-                Guid.NewGuid(), 
+                Guid.NewGuid(),
+                Guid.NewGuid(),
                 productToAdd.Name, 
                 productToAdd.Description, 
                 productToAdd.ProductCategoryId,

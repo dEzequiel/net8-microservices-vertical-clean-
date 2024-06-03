@@ -13,7 +13,7 @@ namespace IntegrationTest.Catalog.Endpoints
         public async Task DeleteProductEndpoint_ReturnsResponseAndStatusCode204_IntegrationTest(Product productToAdd)
         {
             // Arrange
-            Product prod = new Product(Guid.NewGuid(), productToAdd.Name, productToAdd.Description, productToAdd.ProductCategoryId, (int)ProductCategories.Computer);
+            Product prod = new Product(Guid.NewGuid(), Guid.NewGuid(), productToAdd.Name, productToAdd.Description, productToAdd.ProductCategoryId, (int)ProductCategories.Computer);
 
             _dbContext.Products.Add(prod);
             _dbContext.SaveChanges();

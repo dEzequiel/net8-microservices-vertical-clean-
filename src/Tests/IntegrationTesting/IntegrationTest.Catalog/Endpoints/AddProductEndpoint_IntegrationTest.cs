@@ -1,4 +1,5 @@
 ﻿using Catalog.Api.Domain.Enums;
+using System.Net.Http.Headers;
 
 namespace IntegrationTest.Catalog.Endpoints
 {
@@ -14,7 +15,10 @@ namespace IntegrationTest.Catalog.Endpoints
             // Arrange
             string GenerateNewGuid() => Guid.NewGuid().ToString();
             var request = new AddProductRequest(GenerateNewGuid(), GenerateNewGuid(), 00, (int)ProductCategories.MobilePhone);
-            
+            var token = new JwtTokenForTesting().Build();
+
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
             // Act
             var response = await _client.PostAsJsonAsync("/products", request);
             var responseString = await response.Content.ReadAsStringAsync();
