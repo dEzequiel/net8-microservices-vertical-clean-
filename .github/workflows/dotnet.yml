@@ -20,16 +20,12 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-    - name: Listing 2
-      run: ls
-    - name: Move to working directoryy
-      run: cd ./src
-      working-directory: ./src
     - name: Listing
       run: ls
+      working-directory: src
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: ./src
+      working-directory: src
     - name: Build
       run: dotnet build --no-restore
-      working-directory: ./src
+      working-directory: src
