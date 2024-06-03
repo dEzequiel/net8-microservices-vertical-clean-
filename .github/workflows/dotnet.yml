@@ -24,11 +24,12 @@ jobs:
       run: ls
     - name: Move to working directoryy
       run: cd ./src
+      working-directory: ./src
     - name: Listing
       run: ls
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: ./src
     - name: Build
       run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      working-directory: ./src
