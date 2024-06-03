@@ -1,4 +1,10 @@
-﻿namespace IntegrationTest.Catalog.Endpoints
+﻿using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Text;
+
+namespace IntegrationTest.Catalog.Endpoints
 {
     public class FindAllProductsEndpoint_IntegrationTest : BaseIntegrationTest
     {
@@ -11,6 +17,9 @@
         {
             // Arrange
             var getRequest = new HttpRequestMessage(HttpMethod.Get, "/products");
+            var token = new JwtTokenForTesting().Build();
+
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             // Act
             var response = await _client.SendAsync(getRequest);
@@ -28,5 +37,6 @@
             response.EnsureSuccessStatusCode();
             Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
         }
+
     }
 }

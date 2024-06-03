@@ -1,14 +1,12 @@
 ﻿using Auth.Service.Data;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Win32;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace IntegrationTest.Auth.Endpoints
 {
-    public class RegisterUserController_IntegrationTest : AuthBaseTesting
+    public class UserController_IntegrationTest : AuthBaseTesting
     {
-        public RegisterUserController_IntegrationTest(AuthApplicationFactory factory) : base(factory)
+        public UserController_IntegrationTest(AuthApplicationFactory factory) : base(factory)
         {
         }
 

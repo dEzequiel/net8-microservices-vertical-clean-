@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Testcontainers.PostgreSql;
 
 namespace IntegrationTest.Catalog.Config
@@ -14,6 +16,11 @@ namespace IntegrationTest.Catalog.Config
             .WithUsername("postgres")
             .WithPassword("postgres")
             .Build();
+
+        public IntegrationTestApplicationFactory()
+        {
+            
+        }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -30,7 +37,21 @@ namespace IntegrationTest.Catalog.Config
                     //var postgresConnectionString = $"Host=localhost;Port=5433;Database=integration_tests_{dbSuffix};Username=postgres;Password=postgres;Maximum Pool Size=1";
                     opt.UseNpgsql(_dbContainer.GetConnectionString());
                 });
+                srv.Configure<JwtBearerOptions>(
+                    JwtBearerDefaults.AuthenticationScheme,
+                    options =>
+                    {
+                        options.Configuration = new OpenIdConnectConfiguration
+                        {
+                            Issuer = JwtTokenProvider.Issuer,
+                        };
+                        options.TokenValidationParameters.ValidIssuer = JwtTokenProvider.Issuer;
+                        options.TokenValidationParameters.ValidAudience = JwtTokenProvider.Issuer;
+                        options.Configuration.SigningKeys.Add(JwtTokenProvider.SecurityKey);
+                    }
+                );
             });
+
         }
 
         public async Task InitializeAsync()
@@ -55,7 +76,7 @@ namespace IntegrationTest.Catalog.Config
         }
         private static async Task SeedProductAsync(DatabaseContext dbContext)
         {
-            var isAnyProduct = await dbContext.Products.AnyAsync();
+            var isAnyProduct = dbContext.Products.Any();
             if (!isAnyProduct)
             {
                 await dbContext.AddRangeAsync(InitialData.Products);
